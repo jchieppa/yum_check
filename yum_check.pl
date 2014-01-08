@@ -2,7 +2,7 @@
 ####################################################################################
 # Run Yum Check-Update and email results to contact.
 # 1/7/2014
-# Version 1.0.3
+# Version 1.1
 # jchieppa@gmail.com
 ####################################################################################
 
@@ -26,15 +26,21 @@ chomp (my $host = `hostname -s`);
 my $domain = "domain.com";
 my $to_addr = "email\@$domain";
 my $from_addr = "$host\@$domain";
+my $smtp = 'localhost';
+my $port = '25';
 
 my @updates = `yum list updates -q`;
 
-my %mail = ( To     => $to_addr,
+if (@updates == 0) {
+		exit;
+		}
+		else {
+			my %mail = ( To      => $to_addr,
             From    => $from_addr,
             Subject => "Yum Available Updates for Host $host",
             Message => "The following updates are currently available for $host\.$domain\n\n@updates"
-           );
-
-  sendmail(%mail) or die $Mail::Sendmail::error;
-  
+           );           
+           $mail{server} = "$smtp:$port";           
+           sendmail(%mail) or die $Mail::Sendmail::error;
+    }     		
 exit;
