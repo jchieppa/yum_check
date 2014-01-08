@@ -35,7 +35,8 @@ if (@updates == 0) {
 		exit;
 		}
 		else {
-			my %mail = ( To      => $to_addr,
+			my %mail = ( 
+			To      => $to_addr,
             From    => $from_addr,
             Subject => "Yum Available Updates for Host $host",
             Message => "The following updates are currently available for $host\.$domain\n\n@updates"
