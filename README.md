@@ -13,7 +13,7 @@ Copy the yum_updates.pl script to /usr/local/sbin or other preferred directory.
 Add to your root user crontab a preferred interval.  We run ours every Monday so we have 
 the following in crontab
 
-* 2 * * 1 /usr/local/sbin/yum_check.pl > /dev/null 2>&1
+0 2 * * 1 /usr/local/sbin/yum_check.pl > /dev/null 2>&1
 
 CONFIGURATION
 =============
